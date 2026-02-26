@@ -9,7 +9,7 @@
 //         await dialog.accept()
 //     })})
 
-import { test } from '@playwright/test';
+import { test,expect } from '@playwright/test';
 
 test("dialog", async ({ page }) => {
 
@@ -24,5 +24,7 @@ test("dialog", async ({ page }) => {
     await page.frameLocator("#iframeResult")
         .getByRole("button", { name: "Try it" })
         .click();
+        const result = page.frameLocator("//iframe[@id='iframeResult']").locator("#demo")
+    await expect.soft(result).toContainText("You pressed OK!")
 
 });
